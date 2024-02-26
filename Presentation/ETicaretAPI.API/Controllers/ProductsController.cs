@@ -22,7 +22,15 @@ namespace ETicaretAPI.API.Controllers
         public async Task<IActionResult> Get()
         {
 
-            return Ok(_productReadRepository.GetAll(false));
+            return Ok(_productReadRepository.GetAll(false).Select(p => new
+            {
+                p.Id,
+                p.Name,
+                p.Price,
+                p.Stock,
+                p.CreatedDate,
+                p.UpdateDate
+            }));
         }
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(string id)
